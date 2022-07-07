@@ -9,4 +9,4 @@ const newSchema = new Schema({
     archiveDate: Date
 })
 
-module.export = model('New', newSchema);
+module.exports = model('New', newSchema);

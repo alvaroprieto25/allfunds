@@ -11,55 +11,77 @@
 		<ng-view />
 
 		<script type="text/ng-template" id="index.html">
-			<section id="todoapp">
-				<header id="header">
-				<h1><b>NEWS</b></h1>
+			<section id="newsapp">
+				<header id="header" ng-show="showNews">
+					<h1><b>NEWS</b></h1>
+					<h3 ng-click="showNews=!showNews"><b>ARCHIVED</b></h3>
 				</header>
-				<section id="main" ng-show="showNews" ng-cloak>
-					<ul id="news-list">
+				<header id="header" ng-show="!showNews">
+					<h1><b>ARCHIVED</b></h1>
+					<h3 ng-click="showNews=!showNews"><b>NEWS</b></h3>
+				</header>
+				<section id="main" ng-cloak>
+					<ul id="news-list" ng-show="showNews">
 						<li>
 							<div class="view">
-								<div>
-									<label>New</label>
+								<div class="title">
+									<label>Los gatos son bonitos</label>
 								</div>
-								<div>
-									<label>Description of the new from the title upside</label>
+								<div class="description">
+									<label>Un estudio de la universidad de masachusets confirma que los gatos son preciosos.</label>
 								</div>
-								<div>
-									<label>Francesco Virgolini</label>
+								<div class="author">
+									<label class="author">Michi miau</label>
 								</div>
-								<button class="destroy" ng-click="removeTodo(todo)">Archive</button>
+								<button class="destroy" ng-click="archiveNew(new)">Archive</button>
 							</div>
 						</li>
 						<li>
 							<div class="view">
-								<div>
-									<label>New</label>
+								<div class="title">
+									<label>Nuevo podio para la familia Vergolini</label>
 								</div>
-								<div>
-									<label>Description of the new from the title upside</label>
+								<div class="description">
+									<label>"Celebramos la victoria con un fiaaaaaum" nos comunicaba Francesco Vergolini</label>
 								</div>
-								<div>
-									<label>Francesco Virgolini</label>
+								<div class="author">
+									<label class="author">Francesco Virgolini</label>
 								</div>
-								<button class="destroy" ng-click="removeTodo(todo)">Archive</button>
+								<button class="destroy" ng-click="archiveNew(new)">Archive</button>
 							</div>
 						</li>
 						<li>
 							<div class="view">
-								<div>
-									<label>New</label>
+								<div class="title">
+									<label>Comer mientras se programa</label>
 								</div>
-								<div>
-									<label>Description of the new from the title upside</label>
+								<div class="description">
+									<label>Un estudio de una persona sin estudios confirma que pasar el dia en la silla comiendo nachos no adelgaza en absoluto</label>
 								</div>
-								<div>
-									<label>Francesco Virgolini</label>
+								<div class="author">
+									<label class="author">Un don naide</label>
 								</div>
-								<button class="destroy" ng-click="removeTodo(todo)">Archive</button>
+								<button class="destroy" ng-click="archiveNew(new)">Archive</button>
 							</div>
 						</li>
 					</ul>
+					<ul id="news-list" ng-show="!showNews">
+						<li>
+							<div class="view">
+								<div class="title">
+									<label>Los gatos son bonitos</label>
+								</div>
+								<div class="description">
+									<label>Un estudio de la universidad de masachusets confirma que los gatos son preciosos.</label>
+								</div>
+								<div class="author">
+									<label class="author">Michi miau</label>
+								</div>
+								<button class="destroy" ng-click="archiveNew(new)">Archive</button>
+							</div>
+						</li>
+					</ul>
+					<!--
 					<ul id="news-list">
 						<li ng-repeat="new in news">
 							<div class="view">
@@ -72,10 +94,11 @@
 								<div>
 									<label>{{new.author}}</label>
 								</div>
-								<button class="destroy" ng-click="archiveNew(todo)"></button>
+								<button class="destroy" ng-click="archiveNew(new)"></button>
 							</div>
 						</li>
 					</ul>
+					-->
 				</section>
 			</section>
 

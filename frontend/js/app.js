@@ -1,7 +1,7 @@
 /*global angular */
 
 /**
- * The main TodoMVC app module
+ * The main NewsMVC app module
  *
  * @type {angular.Module}
  */
@@ -10,13 +10,13 @@ angular.module('mainApp', ['ngRoute'])
 		'use strict';
 
 		var routeConfig = {
-			controller: 'TodoCtrl',
+			controller: 'NewCtrl',
 			templateUrl: 'index.html',
 			resolve: {
-				store: function (todoStorage) {
+				store: function (newStorage) {
 					// Get the correct module (API or localStorage).
-					return todoStorage.then(function (module) {
-						module.get(); // Fetch the todo records in the background.
+					return newStorage.then(function (module) {
+						module.get(); // Fetch the news records in the background.
 						return module;
 					});
 				}

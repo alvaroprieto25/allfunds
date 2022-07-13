@@ -2,12 +2,16 @@
 
 /**
  * The main controller for the app. The controller:
- * - retrieves and persists the model via the todoStorage service
+ * - retrieves and persists the model via the newStorage service
  * - exposes the model to the template and provides event handlers
  */
 angular.module('mainApp')
-	.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, store) {
+	.controller('NewCtrl', function NewCtrl($scope, $routeParams, $filter, store) {
 		'use strict';
+
+		$scope.showNews = true;
+
+		var news = store.news;
 
 		var todos = $scope.todos = store.todos;
 
@@ -31,7 +35,11 @@ angular.module('mainApp')
 		$scope.editTodo = function (todo) {
 			$scope.editedTodo = todo;
 			// Clone the original todo to restore it on demand.
-			$scope.originalTodo = angular.extend({}, todo);
+			$scope.originalNew = angular.extend({}, todo);
 		};
+
+		$scope.archiveNew = function (newNew) {
+
+		}
 
 	});

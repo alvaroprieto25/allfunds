@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 
+
+// Schema
 const newSchema = new Schema({
     title: String,
     description: String,
@@ -9,4 +11,5 @@ const newSchema = new Schema({
     archiveDate: Date
 })
 
+// Model 
 module.exports = model('New', newSchema);

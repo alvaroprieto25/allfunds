@@ -1,7 +1,7 @@
 /*global angular */
 
 /**
- * The main NewsMVC app module
+ * The main News app module
  *
  * @type {angular.Module}
  */
@@ -14,11 +14,7 @@ angular.module('mainApp', ['ngRoute'])
 			templateUrl: 'index.html',
 			resolve: {
 				store: function (newStorage) {
-					// Get the correct module (API or localStorage).
-					return newStorage.then(function (module) {
-						module.get(); // Fetch the news records in the background.
-						return module;
-					});
+					return newStorage;
 				}
 			}
 		};

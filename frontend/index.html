@@ -2,8 +2,6 @@
 <html lang="en" data-framework="angularjs">
 	<head>
 		<meta charset="utf-8">
-
-		<link rel="stylesheet" href="node_modules/common/base.css">
 		<link rel="stylesheet" href="node_modules/app-css/index.css">
 		<style>[ng-cloak] { display: none; }</style>
 	</head>
@@ -21,95 +19,54 @@
 					<h3 ng-click="showNews=!showNews"><b>NEWS</b></h3>
 				</header>
 				<section id="main" ng-cloak>
-					<ul id="news-list" ng-show="showNews">
-						<li>
+					<ul id="news-list" ng-show="showNews" ng-init="loadNews()">
+						<li ng-repeat="new in news | orderBy: '-date'">
 							<div class="view">
 								<div class="title">
-									<label>Los gatos son bonitos</label>
-								</div>
-								<div class="description">
-									<label>Un estudio de la universidad de masachusets confirma que los gatos son preciosos.</label>
-								</div>
-								<div class="author">
-									<label class="author">Michi miau</label>
-								</div>
-								<button class="destroy" ng-click="archiveNew(new)">Archive</button>
-							</div>
-						</li>
-						<li>
-							<div class="view">
-								<div class="title">
-									<label>Nuevo podio para la familia Vergolini</label>
-								</div>
-								<div class="description">
-									<label>"Celebramos la victoria con un fiaaaaaum" nos comunicaba Francesco Vergolini</label>
-								</div>
-								<div class="author">
-									<label class="author">Francesco Virgolini</label>
-								</div>
-								<button class="destroy" ng-click="archiveNew(new)">Archive</button>
-							</div>
-						</li>
-						<li>
-							<div class="view">
-								<div class="title">
-									<label>Comer mientras se programa</label>
-								</div>
-								<div class="description">
-									<label>Un estudio de una persona sin estudios confirma que pasar el dia en la silla comiendo nachos no adelgaza en absoluto</label>
-								</div>
-								<div class="author">
-									<label class="author">Un don naide</label>
-								</div>
-								<button class="destroy" ng-click="archiveNew(new)">Archive</button>
-							</div>
-						</li>
-					</ul>
-					<ul id="news-list" ng-show="!showNews">
-						<li>
-							<div class="view">
-								<div class="title">
-									<label>Los gatos son bonitos</label>
-								</div>
-								<div class="description">
-									<label>Un estudio de la universidad de masachusets confirma que los gatos son preciosos.</label>
-								</div>
-								<div class="author">
-									<label class="author">Michi miau</label>
-								</div>
-								<button class="destroy" ng-click="archiveNew(new)">Archive</button>
-							</div>
-						</li>
-					</ul>
-					<!--
-					<ul id="news-list">
-						<li ng-repeat="new in news">
-							<div class="view">
-								<div>
 									<label>{{new.title}}</label>
 								</div>
-								<div>
+								<div class="description">
 									<label>{{new.description}}</label>
 								</div>
-								<div>
-									<label>{{new.author}}</label>
+								<div class="author">
+									<label class="author">{{new.author}}  | {{new.date.slice(0,10)}}</label>
 								</div>
-								<button class="destroy" ng-click="archiveNew(new)"></button>
+								<button class="destroy" ng-click="archiveNew(new)">Archive</button>
 							</div>
 						</li>
 					</ul>
-					-->
+					<ul id="news-list" ng-show="!showNews" ng-init="loadArchivated()">
+						<li ng-repeat="new in archivated | orderBy: '-archiveDate'">
+							<div class="view">
+								<div class="title">
+									<label>{{new.title}}</label>
+								</div>
+								<div class="description">
+									<label>{{new.description}}</label>
+								</div>
+								<div class="author">
+									<label class="author">{{new.author}} | {{new.date.slice(0,10)}} | {{new.archiveDate.slice(0,10)}}</label>
+								</div>
+								<button class="destroy" ng-click="deleteNew(new)">Delete</button>
+							</div>
+						</li>
+					</ul>
 				</section>
+				<!--
+					<button class="insert">Add new</button>
+					<section>
+						<form>
+							<input>
+						</form>
+					</section>
+				-->
 			</section>
 
 		</script>
-		<script src="node_modules/common/base.js"></script>
 		<script src="node_modules/angular/angular.js"></script>
 		<script src="node_modules/angular-route/angular-route.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/controllers/mainCtrl.js"></script>
 		<script src="js/services/mainStorage.js"></script>
-		<script src="js/directives/mainFocus.js"></script>
-		<script src="js/directives/mainEscape.js"></script>
 	</body>
 </html>

@@ -11,35 +11,25 @@ angular.module('mainApp')
 
 		$scope.showNews = true;
 
-		var news = store.news;
+		var news = $scope.news = store.news;
+		var archivated = $scope.archivated = store.archivated;
 
-		var todos = $scope.todos = store.todos;
+		setInterval(()=> { store.get(), store.getArchivated() }, 500);
 
-		$scope.newTodo = '';
-		$scope.editedTodo = null;
+		$scope.loadNews = async function(){
+			await store.get();
+		}
 
-		$scope.$watch('todos', function () {
-			$scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
-			$scope.completedCount = todos.length - $scope.remainingCount;
-			$scope.allChecked = !$scope.remainingCount;
-		}, true);
+		$scope.loadArchivated = async function () {
+			await store.getArchivated();
+		}
 
-		// Monitor the current route for changes and adjust the filter accordingly.
-		$scope.$on('$routeChangeSuccess', function () {
-			var status = $scope.status = $routeParams.status || '';
-			$scope.statusFilter = (status === 'active') ?
-				{ completed: false } : (status === 'completed') ?
-				{ completed: true } : {};
-		});
+		$scope.archiveNew = async function(newNew){
+			await store.put(newNew._id);
+		}
 
-		$scope.editTodo = function (todo) {
-			$scope.editedTodo = todo;
-			// Clone the original todo to restore it on demand.
-			$scope.originalNew = angular.extend({}, todo);
-		};
-
-		$scope.archiveNew = function (newNew) {
-
+		$scope.deleteNew = async function(newNew){
+			await store.delete(newNew._id);
 		}
 
 	});
